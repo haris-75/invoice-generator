@@ -6,17 +6,18 @@ type DropdownProps= {
     label: string;
     placeholder: string;
     selectedValue: string;
-    setSelectedValue: (value:string)=>void;
+    setSelectedValue: (value:string, name:string)=>void;
     dropdownList: string[];
-    touched: boolean;
-    error: string;
+    touched: boolean | undefined;
+    error: string | undefined;
+    name: string;
 }
 
-export const Dropdown = ({ label, touched, error, placeholder, selectedValue, setSelectedValue, dropdownList }: DropdownProps) => {
+export const Dropdown = ({ label, touched, error, placeholder, selectedValue, setSelectedValue, dropdownList, name }: DropdownProps) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const textColor = selectedValue ? 'text-dark' : 'text-placeholder';
     const selectValueHandler = (value: string) => { 
-        setSelectedValue(value);
+        setSelectedValue(name, value)
         setShowDropdown(false);
     }
     return (

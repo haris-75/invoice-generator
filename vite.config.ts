@@ -13,6 +13,7 @@ export default defineConfig({
         '@utils': path.resolve(__dirname, './src/utils'),
         '@common': path.resolve(__dirname, './src/common'),
         '@constants': path.resolve(__dirname, './src/constants'),
+        '@hooks': path.resolve(__dirname, './src/hooks'),
         '@components': path.resolve(__dirname, './src/components'),
         '@svg': path.resolve(__dirname, './src/components/svg'),
     },

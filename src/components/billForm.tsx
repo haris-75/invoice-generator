@@ -1,67 +1,82 @@
-import { useState } from 'react'
 import { Dropdown } from './dropdown'
 import { Input } from './input'
+import { COMPANY } from '@constants';
+import { UseFormikFormReturnType } from '@hooks';
+import { BillingFormValues } from '@utils';
 
-export const BillForm = () => {
-    const [country, setCountry]=useState('')
+export const BillForm = ({
+  title,
+  handleChange,
+  errors,
+  touched,
+  values,
+  setFieldValue
+}:UseFormikFormReturnType<BillingFormValues> & {title:string}) => {
+  const formTitle = title===COMPANY?'Bill From':'Bill To'
     return (
       <div className='flex flex-col gap-4'>
-          <h1 className='text-dark font-bold text-2xl'>Bill Form</h1>
+          <h1 className='text-dark font-bold text-2xl'>{formTitle}</h1>
           <div className="grid grid-cols-12 gap-4">
               <div className="col-span-6">
                   <Input
                     type='text'
                     label='Company Name'
-                    touched={false}
-                    error=''
-                    disabled={false}
+                    touched={touched?.name}
+                    error={errors?.name}
+                    value={values?.name}
+                    onChange={handleChange('name')}
                   />
               </div>
               <div className="col-span-6">
                   <Input
                     type='text'
                     label='Company Email'
-                    touched={false}
-                    error=''
-                    disabled={false}
+                    touched={touched?.email}
+                    error={errors?.email}
+                    value={values?.email}
+                    onChange={handleChange('email')}
                   />
               </div>
               <div className="col-span-4">
                   <Dropdown
-                      label='Country'
-                      touched={false}
-                      error=''
-                      placeholder='Select Country'
-                      selectedValue={country}
-                      setSelectedValue={setCountry}
-                      dropdownList={['Pakistan', 'India', 'USA', 'Canada']} 
+                    label='Country'
+                    touched={touched?.country}
+                    error={errors?.country}
+                    placeholder='Select Country'
+                    selectedValue={values?.country}
+                    setSelectedValue={setFieldValue}
+                    dropdownList={['Pakistan', 'India', 'USA', 'Canada']}
+                    name='country'
                   />
               </div>
               <div className="col-span-4">
                   <Input
                     type='text'
                     label='City'
-                    touched={false}
-                    error=''
-                    disabled={false}
+                    touched={touched?.city}
+                    error={errors?.city}
+                    value={values?.city}
+                    onChange={handleChange('city')}
                   />
               </div>
               <div className="col-span-4">
                   <Input
                     type='text'
                     label='Postal Code'
-                    touched={false}
-                    error=''
-                    disabled={false}
+                    touched={touched?.postalCode}
+                    error={errors?.postalCode}
+                    value={values?.postalCode}
+                    onChange={handleChange('postalCode')}
                   />
               </div>
               <div className="col-span-12">
                   <Input
                     type='text'
-                    label='Postal Code'
-                    touched={false}
-                    error=''
-                    disabled={false}
+                    label='Street Address'
+                    touched={touched?.streetAddress}
+                    error={errors?.streetAddress}
+                    value={values?.streetAddress}
+                    onChange={handleChange('streetAddress')}
                   />
                 </div>
             </div>

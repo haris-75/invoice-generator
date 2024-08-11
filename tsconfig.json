@@ -25,6 +25,7 @@
       "@utils": ["utils"],
       "@common/*": ["common/*"],
       "@constants": ["constants"],
+      "@hooks": ["hooks"],  
       "@components": ["components"],      
       "@svg": ["components/svg"],
     }

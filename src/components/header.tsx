@@ -1,6 +1,11 @@
 import { Button } from './button'
 
-export const Header=()=> {
+type HeaderProps = {
+  submitHandler: () => void;
+  resetHandler: () => void;
+}
+
+export const Header=({submitHandler, resetHandler}:HeaderProps)=> {
   return (
     <div className='py-7 w-full flex justify-between'>
       <div>
@@ -13,7 +18,7 @@ export const Header=()=> {
             variant='secondary'
             size='sm'
             text='Reset'
-            onClick={() => null}
+            onClick={resetHandler}
           />
         </div>
         <div>
@@ -21,7 +26,7 @@ export const Header=()=> {
             variant='primary'
             size='sm'
             text='Save'
-            onClick={() => null}
+            onClick={submitHandler}
           />
         </div>
       
