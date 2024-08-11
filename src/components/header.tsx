@@ -15,6 +15,7 @@ export const Header=({submitHandler, resetHandler}:HeaderProps)=> {
       <div className='flex gap-[12px]'>
         <div>
           <Button
+            type='submit'
             variant='secondary'
             size='sm'
             text='Reset'
@@ -23,6 +24,7 @@ export const Header=({submitHandler, resetHandler}:HeaderProps)=> {
         </div>
         <div>
           <Button
+            type='submit'
             variant='primary'
             size='sm'
             text='Save'

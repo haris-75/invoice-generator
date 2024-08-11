@@ -5,11 +5,12 @@ type FormValues = Record<string, string | number>;
 
 export type UseFormikFormReturnType<TValues extends FormikValues> = {
     handleChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+    handleSubmit:  (e?: React.FormEvent<HTMLFormElement>) => void;
     errors: FormikErrors<TValues>;
     touched: FormikTouched<TValues>;
     values: TValues;
-    setFieldError: (field: keyof TValues, message: string | undefined) => void;
-    setFieldValue: (field: keyof TValues, value: string|undefined) => void;
+    setFieldError?: (field: keyof TValues, message: string | undefined) => void;
+    setFieldValue?: (field: keyof TValues, value: string|undefined) => void;
   
 };
 

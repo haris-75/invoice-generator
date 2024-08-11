@@ -1,7 +1,7 @@
 import { billingFormInitialValues, BillingFormSchema } from '@utils'
 import { useFormikForm } from './useFormikForm'
 
-export const useBillingForm = (submitHandler: ()=>void) => {
+export const useBillingForm = (submitHandler: (values:any)=>void) => {
   const {
     handleChange,
     handleSubmit,

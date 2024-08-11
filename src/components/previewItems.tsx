@@ -1,5 +1,10 @@
+import { Item } from './itemForm';
 
-export function PreviewItems() {
+export function PreviewItems({ itemArray }: { itemArray: Item[] }) {
+    const subTotal = itemArray?.map(({ total }) =>
+        (total))?.reduce((accumulator, currentValue) =>
+        { return accumulator + currentValue }, 0);
+    const grandTotal = subTotal + (subTotal * 0.1);
     return (
         <div>
             <div className='py-4 border-b-[1px] border-border'>
@@ -18,19 +23,19 @@ export function PreviewItems() {
                     </div>
                 </div>
             {
-                [1, 2, 3]?.map((ele) =>
-                    <div key={ele} className='grid grid-cols-4'>
+                itemArray?.map(({name,price,quantity,key,total}) =>
+                    <div key={key} className='grid grid-cols-4'>
                         <div className='col-span-1 py-2 rounded-l'>
-                            <span className='text-base font-medium text-dark py-2 ml-4 '>Banner Design</span>
+                            <span className='text-base font-medium text-dark py-2 ml-4 '>{name}</span>
                         </div>
                         <div className='col-span-1 py-2'>
-                            <span className='text-base font-medium text-dark py-2'>{ ele }</span>
+                            <span className='text-base font-medium text-dark py-2'>{ quantity }</span>
                         </div>
                         <div className='col-span-1 py-2'>
-                            <span className='text-base font-medium text-dark py-2'>{`$ ${100}`}</span>
+                            <span className='text-base font-medium text-dark py-2'>{`$ ${price}`}</span>
                         </div>
                         <div className='col-span-1 py-2 rounded-r'>
-                            <span className='text-base font-medium text-dark py-2'>{`$ ${100}`}</span>
+                            <span className='text-base font-medium text-dark py-2'>{`$ ${total}`}</span>
                         </div>
                     </div>
                 )
@@ -40,7 +45,7 @@ export function PreviewItems() {
               <div className='col-span-1'/>           
               <div className='col-span-1 flex justify-between'>
                   <span className='text-base font-bold text-dark'>Subtotal</span>
-                  <span className='text-base font-bold text-dark'>$ 320.00</span>
+                  <span className='text-base font-bold text-dark'>{`$ ${subTotal}`}</span>
               </div>
               <div className='col-span-1'/>   
               <div className='col-span-1 flex justify-between'>
@@ -50,7 +55,7 @@ export function PreviewItems() {
               <div className='col-span-1'/>   
               <div className='col-span-1 flex justify-between'>
                   <span className='text-xl font-bold text-dark'>Total</span>
-                  <span className='text-xl font-bold text-dark'>$ 352.00</span>
+                  <span className='text-xl font-bold text-dark'>{`$ ${grandTotal}`}</span>
                 </div>
             </div>    
       </div>

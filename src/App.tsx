@@ -1,11 +1,13 @@
-import { BillForm, Header, InvoiceForm, ItemForm, PreviewInvoice, PreviewItems } from '@components'
+import { BillForm, Header, InvoiceForm, Item, ItemForm, PreviewInvoice, PreviewItems } from '@components'
 import { useBillingForm, useFormikForm } from '@hooks';
 import { CLIENT, COMPANY } from '@constants';
-import { invoiceFormInitialValues, InvoiceFormSchema } from '@utils';
+import { getTotalPrice, invoiceFormInitialValues, InvoiceFormSchema, itemFormInitialValues, ItemFormSchema } from '@utils';
 import { format } from 'date-fns';
+import { useState } from 'react';
 
 
 function App() {
+  const [itemArray, setItemArray]= useState<Item[]>([])
   const {
     handleChange: handleCompanyChange,
     handleSubmit: handleCompanySubmit,
@@ -41,12 +43,33 @@ function App() {
       invoiceFormInitialValues, clientSubmitHandler , InvoiceFormSchema
     );
   
-  function clientSubmitHandler(values) { 
+  const {
+    handleChange: handleItemChange,
+    handleSubmit: handleItemSubmit,
+    errors: itemErrors,
+    touched: itemTouched,
+    values: itemValues,
+    setFieldError: setItemFieldError,
+    clearForm: clearItemForm,
+    } = useFormikForm(itemFormInitialValues, itemSubmitHandler, ItemFormSchema,);
+  
+  function itemSubmitHandler(values: any) { 
+    setItemArray([...itemArray, {
+      name: values?.name,
+      price: values?.price,
+      quantity: values?.quantity,
+      key: JSON.stringify(values?.name + values?.price + values?.quantity),
+      total: parseInt(getTotalPrice(values?.price, values?.quantity))
+    }]);
+    clearItemForm();
+  }
+  
+  function clientSubmitHandler(values: any) { 
     console.log('client',values);
   }
 
 
-  function companytSubmitHandler(values) { 
+  function companytSubmitHandler(values:any) { 
     console.log('company',values);
   }
   
@@ -57,12 +80,11 @@ function App() {
   }
 
   const resetHandler = () => {
-    console.log({    clearClientForm,
-    clearCompanyForm,
-    clearInvoiceForm,})
     clearClientForm();
     clearCompanyForm();
     clearInvoiceForm();
+    clearItemForm();
+    setItemArray([]);
   }
 
   const billedFrom = {
@@ -88,7 +110,6 @@ function App() {
   return (
     <div className='font-inter px-8 bg-light w-screen h-screen'>
       <Header submitHandler={formHandler} resetHandler={resetHandler}/>
-      <button type='button' onClick={formHandler}>Submit</button>
       <div className='grid grid-cols-2 gap-8'>
         <div className='p-6 border-[1px] border-border rounded-3xl col-span-1 flex flex-col gap-4'>
           <BillForm
@@ -117,7 +138,16 @@ function App() {
             setFieldError={setInvoiceFieldError}
             setFieldValue={setInvoiceFieldValue}
           />
-          <ItemForm />
+          <ItemForm
+            itemArray={itemArray}
+            setItemArray={setItemArray}
+            handleSubmit={handleItemSubmit}
+            handleChange={handleItemChange}
+            errors={itemErrors}
+            touched={itemTouched}
+            values={itemValues}
+            setFieldError={setItemFieldError}
+          />
         </div>
         <div className='col-span-1 p-6 bg-lightSecondary rounded-3xl flex flex-col gap-4'>
           <h1 className='text-dark font-bold text-2xl'>Preview</h1>
@@ -130,7 +160,7 @@ function App() {
               billedTo={billedTo}
               description={invoiceValues?.description}
             />
-            <PreviewItems />
+            <PreviewItems  itemArray={itemArray}/>
           </div>
         </div>
       </div>

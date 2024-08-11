@@ -3,7 +3,7 @@ export const billingFormInitialValues = {
     name: '',
     country: '',
     city: '',
-    postalCode: -1,
+    postalCode: '',
     streetAddress:'',
 };
 
@@ -13,5 +13,12 @@ export const invoiceFormInitialValues = {
     description: '',
 };
 
+export const itemFormInitialValues = {
+    name: '',
+    quantity: '',
+    price: '',
+};
+
 export type BillingFormValues = typeof billingFormInitialValues;
 export type InvoiceFormValues = typeof invoiceFormInitialValues;
+export type ItemFormValues = typeof itemFormInitialValues;

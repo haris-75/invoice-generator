@@ -17,3 +17,17 @@ export const InvoiceFormSchema = Yup.object().shape({
   description: Yup.string().required().label('Project Description'),
   date: Yup.string().required().label('Date'),
 });
+
+export const ItemFormSchema = Yup.object().shape({
+  name: Yup.string().required().label('Name'),
+  quantity: Yup.number()
+    .positive('Quantity must be a positive number')
+    .integer('Quantity must be an integer')
+    .required()
+    .label('Quantity'),
+  price: Yup.number()
+    .positive('Price must be a positive number')
+    .integer('Price must be an integer')
+    .required()
+    .label('Price'),
+});
