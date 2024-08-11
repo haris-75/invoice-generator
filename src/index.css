@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.carrot-icon{
+    right: 15px;
+    bottom: 15px;
+}

@@ -21,6 +21,7 @@ export default {
           light:'#ffffff',
           dark: '#101828', 
           gray: '#76787D',
+          silver:'#EAECF0',
           darkSecondary: '#344054',
           lightSecondary:'#F5F5F5',
           placeholder:'#667085',
