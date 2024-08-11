@@ -28,6 +28,7 @@
       "@common/*": ["common/*"],
       "@constants": ["constants"],
       "@components": ["components"],
+      "@svg": ["components/svg"],
     }
   },
   "include": ["src"]
