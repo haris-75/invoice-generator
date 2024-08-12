@@ -12,7 +12,8 @@ export const BillForm = ({
   values,
   setFieldValue
 }:UseFormikFormReturnType<BillingFormValues> & {title:string}) => {
-  const formTitle = title===COMPANY?'Bill From':'Bill To'
+  const formTitle = title === COMPANY ? 'Bill From' : 'Bill To';
+  const labelName = title === COMPANY ? 'Company' : 'Client'
     return (
       <div className='flex flex-col gap-4'>
           <h1 className='text-dark font-bold text-2xl'>{formTitle}</h1>
@@ -20,7 +21,7 @@ export const BillForm = ({
               <div className="col-span-6">
                   <Input
                     type='text'
-                    label='Company Name'
+                    label={`${labelName} Name`}
                     touched={touched?.name}
                     error={errors?.name}
                     value={values?.name}
@@ -30,7 +31,7 @@ export const BillForm = ({
               <div className="col-span-6">
                   <Input
                     type='text'
-                    label='Company Email'
+                    label={`${labelName} Email`}
                     touched={touched?.email}
                     error={errors?.email}
                     value={values?.email}

@@ -11,10 +11,12 @@ export const useBillingForm = (submitHandler: (values:any)=>void) => {
     setFieldError,
     setFieldValue,
     clearForm,
+    isValid,
   } =
     useFormikForm(billingFormInitialValues, submitHandler, BillingFormSchema);
   
   return {
+    isValid,
     handleChange,
     handleSubmit,
     errors,
